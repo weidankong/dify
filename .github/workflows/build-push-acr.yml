@@ -1,11 +1,11 @@
-name: Build and Push API & Web
+name: Build and Push API & Web - ACR
 
 on:
   push:
     branches:
       - develop
       - releases/*
-      - weidan/develop
+      - weidan/*
   release:
     types: [published]
 
@@ -88,7 +88,7 @@ jobs:
           touch "/tmp/${{ github.run_id }}/${{ matrix.context }}/digests/${digest#sha256:}"
 
       - name: Upload digest
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: digests-${{ matrix.context }}-${{ env.PLATFORM_PAIR }}
           path: /tmp/${{ github.run_id }}/${{ matrix.context }}/digests/*
